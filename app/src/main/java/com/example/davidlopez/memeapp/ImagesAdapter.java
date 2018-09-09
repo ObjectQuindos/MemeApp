@@ -1,6 +1,7 @@
 package com.example.davidlopez.memeapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ public class ImagesAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final String  image = images[position];
 
         if (convertView == null) {
@@ -46,6 +47,15 @@ public class ImagesAdapter extends ArrayAdapter<String> {
         Resources resources = getContext().getResources();
         int resId = resources.getIdentifier(image, "drawable", getContext().getPackageName());
         imageView.setImageResource(resId);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MemeEdition.class);
+                intent.putExtra("imageBackground", images[position]);
+                mContext.startActivity(intent);
+            }
+        });
 
         return convertView;
     }

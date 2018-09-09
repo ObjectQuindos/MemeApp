@@ -10,8 +10,9 @@ public class PhotoAccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_access);
+        setTitle("MemeApp: Elección de foto");
 
-        String[] imagesNamesArray = {"mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground", "mainbackground"};
+        String[] imagesNamesArray = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
         ImagesAdapter imagesAdapter = new ImagesAdapter(this, imagesNamesArray);
