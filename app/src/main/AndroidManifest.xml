@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PhotoAccessActivity" />
-        <activity android:name=".MemeEdition"></activity>
+        <activity android:name=".MemeEdition" />
+        <activity android:name=".MemeFinal"></activity>
     </application>
 
 </manifest>

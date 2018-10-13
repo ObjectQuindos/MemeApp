@@ -1,5 +1,7 @@
 package com.example.davidlopez.memeapp;
 
+import android.widget.ImageView;
+
 import java.io.Serializable;
 
 public class Images implements Serializable {
