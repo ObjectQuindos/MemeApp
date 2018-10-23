@@ -2,10 +2,13 @@ package com.example.davidlopez.memeapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +28,33 @@ public class MemeFinal extends AppCompatActivity {
         setTitle("MemeApp: Compartir Meme");
         setImageBackground();
         setAllTexts();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.shareButton:
+                Bitmap bitmap = this.getScreenShot(findViewById(R.id.rootView));
+                ImageView imageBackground = (ImageView) findViewById(R.id.bitmapImageView);
+                imageBackground.setImageBitmap(bitmap);
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    private Bitmap getScreenShot(View view) {
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
     private void setImageBackground() {
@@ -50,8 +80,8 @@ public class MemeFinal extends AppCompatActivity {
         switch (textPosition) {
             case "up":
                 TextView firstTextView = findViewById(R.id.upperTextView);
+                firstTextView.setText(text);
                 firstTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText);
-                firstTextView.setTextSize(sizeText);
                 firstTextView.setVisibility(View.VISIBLE);
                 break;
             case "center":

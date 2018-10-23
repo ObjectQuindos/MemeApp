@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:MemeApp="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/plusButton"
-        android:icon="@drawable/aumentarfuente"
-        android:orderInCategory="100"
-        MemeApp:showAsAction="always"
-        android:title="" />
+    android:id="@+id/plusButton"
+    android:icon="@drawable/aumentarfuente"
+    android:orderInCategory="100"
+    MemeApp:showAsAction="always"
+    android:title="" />
     <item
         android:id="@+id/minusButton"
         android:icon="@drawable/reducirfuente"
