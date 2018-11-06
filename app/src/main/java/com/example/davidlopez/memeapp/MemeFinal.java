@@ -3,6 +3,8 @@ package com.example.davidlopez.memeapp;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class MemeFinal extends AppCompatActivity {
 
@@ -41,8 +46,9 @@ public class MemeFinal extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.shareButton:
                 Bitmap bitmap = this.getScreenShot(findViewById(R.id.rootView));
-                ImageView imageBackground = (ImageView) findViewById(R.id.bitmapImageView);
-                imageBackground.setImageBitmap(bitmap);
+                //ImageView imageBackground = (ImageView) findViewById(R.id.bitmapImageView);
+                //imageBackground.setImageBitmap(bitmap);
+                shareBitmap(bitmap);
                 break;
             default:
                 break;
@@ -57,14 +63,36 @@ public class MemeFinal extends AppCompatActivity {
         return bitmap;
     }
 
+    private void shareBitmap(Bitmap bitmap) {
+        try {
+            File file = new File(this.getExternalCacheDir(), "bitmap.png");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            file.setReadable(true, false);
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.setType("image/png");
+            startActivity(Intent.createChooser(intent, "Share image via"));
+            Log.i("sharingggggg", "shareBitmap: HHHHHHHHH");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setImageBackground() {
         ImageView imageBackground = (ImageView) findViewById(R.id.backgroundImageViewSelected);
         Intent intent = getIntent();
         imageBackgroundName = intent.getStringExtra("imageBackground");
 
-        Resources resources = getResources();
-        int resId = resources.getIdentifier(imageBackgroundName, "drawable", this.getPackageName());
-        imageBackground.setImageResource(resId);
+        if (textPositions.backgroundImageBitmap == true) {
+            imageBackground.setImageBitmap(BitmapFactory.decodeFile(imageBackgroundName));
+        } else {
+            Resources resources = getResources();
+            int resId = resources.getIdentifier(imageBackgroundName, "drawable", this.getPackageName());
+            imageBackground.setImageResource(resId);
+        }
     }
 
     private void setAllTexts() {

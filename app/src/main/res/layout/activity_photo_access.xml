@@ -20,6 +20,7 @@
             android:padding="15dp"
             android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
+            android:onClick="accessGallery"
             />
 
         <TextView

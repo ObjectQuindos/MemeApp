@@ -54,6 +54,10 @@ public class ImagesAdapter extends ArrayAdapter<String> {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MemeEdition.class);
                 intent.putExtra("imageBackground", images[position]);
+
+                TextPositions textPositions = TextPositions.getInstance();
+                textPositions.backgroundImageBitmap = false;
+
                 mContext.startActivity(intent);
             }
         });

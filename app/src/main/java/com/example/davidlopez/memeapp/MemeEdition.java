@@ -2,8 +2,11 @@ package com.example.davidlopez.memeapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -53,9 +56,13 @@ public class MemeEdition extends AppCompatActivity {
         Intent intent = getIntent();
         imageBackgroundName = intent.getStringExtra("imageBackground");
 
-        Resources resources = getResources();
-        int resId = resources.getIdentifier(imageBackgroundName, "drawable", this.getPackageName());
-        imageBackground.setImageResource(resId);
+        if (textPositions.backgroundImageBitmap == true) {
+            imageBackground.setImageBitmap(BitmapFactory.decodeFile(imageBackgroundName));
+        } else {
+            Resources resources = getResources();
+            int resId = resources.getIdentifier(imageBackgroundName, "drawable", this.getPackageName());
+            imageBackground.setImageResource(resId);
+        }
     }
 
     private void setListenersFontSize() {

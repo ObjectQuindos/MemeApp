@@ -9,6 +9,8 @@ public class TextPositions {
         return  soleInstance;
     }
 
+    Boolean backgroundImageBitmap = false;
+
     Boolean hasFirstText = false;
     Boolean hasSecondText = false;
 
